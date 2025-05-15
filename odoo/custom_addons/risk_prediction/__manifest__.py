@@ -1,0 +1,26 @@
+{
+    'name': 'Risk Prediction',
+    'version': '17.0.1.0.0',
+    'summary': 'Predict employee risk and satisfaction based on Surveys',
+    'category': 'Human Resources',
+    'license': 'LGPL-3',
+    'depends': [
+        'base',
+        'hr',
+        'survey',
+        'mail',
+    ],
+    'data': [
+        'security/groups.xml',
+        'security/ir.model.access.csv',
+        'data/ir_actions_server.xml',
+        'data/hr_demo_employees.xml',
+        'data/survey_question_category_data.xml',
+        'data/employee_satisfaction_survey.xml',
+        'views/hr_employee_views.xml',
+        'views/survey_question_views.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}

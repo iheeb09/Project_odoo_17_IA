@@ -1,0 +1,17 @@
+fastapi==0.110.0
+uvicorn[standard]==0.29.0
+
+# ✅ NLP et modèles de similarité
+sentence-transformers[torch]==2.6.1
+
+# ✅ Traitement de texte (si besoin de tokenisation avancée)
+nltk==3.8.1
+
+# ✅ Algorithmes de ML pour cosine_similarity
+scikit-learn==1.4.2
+
+# ✅ Extraction de texte depuis les CV PDF
+PyMuPDF==1.23.22
+
+# 📦 Requis pour multipart/form-data (upload éventuel futur)
+python-multipart==0.0.9

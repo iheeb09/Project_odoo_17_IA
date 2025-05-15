@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- 📝 Formulaire du poste -->
+    <record id="view_hr_matching_job_form" model="ir.ui.view">
+        <field name="name">hr.matching.job.form</field>
+        <field name="model">hr.matching.job</field>
+        <field name="arch" type="xml">
+            <form string="HR IA Matching Job ">
+                <header>
+                    <button name="action_compute_matching" string="Run IA Matching"
+                            type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                    <notebook>
+                        <page string="CV to Compare">
+                            <field name="cv_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="cv_pdf"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="AI Results">
+                            <field name="result_ids">
+                                <tree>
+                                    <field name="cv_name"/>
+                                    <field name="score"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hr_matching_job_tree" model="ir.ui.view">
+        <field name="name">hr.matching.job.tree</field>
+        <field name="model">hr.matching.job</field>
+        <field name="arch" type="xml">
+            <tree string="Open Positions">
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

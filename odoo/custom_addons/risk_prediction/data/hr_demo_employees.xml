@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- 0) Postes de démo -->
+        <record id="demo_job_developer" model="hr.job">
+            <field name="name">Developer</field>
+        </record>
+        <record id="demo_job_manager" model="hr.job">
+            <field name="name">Manager</field>
+        </record>
+
+        <!-- 1) Lieux de travail -->
+        <record id="demo_part_office_addr" model="res.partner">
+            <field name="name">Office Address</field>
+            <field name="street">1 Rue Centrale</field>
+            <field name="city">Paris</field>
+            <field name="country_id" ref="base.fr"/>
+        </record>
+        <record id="demo_loc_office" model="hr.work.location">
+            <field name="name">Office</field>
+            <field name="address_id" ref="demo_part_office_addr"/>
+        </record>
+        <record id="demo_part_home_addr" model="res.partner">
+            <field name="name">Home Address</field>
+            <field name="street">10 Avenue du Télétravail</field>
+            <field name="city">Lyon</field>
+            <field name="country_id" ref="base.fr"/>
+        </record>
+        <record id="demo_loc_home" model="hr.work.location">
+            <field name="name">Home</field>
+            <field name="address_id" ref="demo_part_home_addr"/>
+        </record>
+
+        <!-- 2) Départements -->
+        <record id="demo_dep_finance" model="hr.department">
+            <field name="name">Finance</field>
+        </record>
+        <record id="demo_dep_it" model="hr.department">
+            <field name="name">IT</field>
+        </record>
+
+        <!-- 3) Employés de démo -->
+
+        <!-- Fatma – bureau, 2 enfants, km_home_work=10, Developer -->
+        <record id="demo_part_fatma" model="res.partner">
+            <field name="name">Fatma</field>
+            <field name="email">fatma@example.com</field>
+        </record>
+        <record id="demo_user_fatma" model="res.users">
+            <field name="name">Fatma</field>
+            <field name="login">fatma</field>
+            <field name="password" eval="'risk'"/>
+            <field name="partner_id" ref="demo_part_fatma"/>
+            <field name="email">fatma@example.com</field>
+            <field name="share">False</field>
+            <field name="groups_id" eval="[
+        (4, ref('base.group_user')),
+        (4, ref('risk_prediction.group_emp_risk'))
+      ]"/>
+        </record>
+        <record id="demo_emp_fatma" model="hr.employee">
+            <field name="name">Fatma</field>
+            <field name="user_id" ref="demo_user_fatma"/>
+            <field name="work_email">fatma@example.com</field>
+            <field name="department_id" ref="demo_dep_finance"/>
+            <field name="work_location_id" ref="demo_loc_office"/>
+            <field name="birthday">1988-04-12</field>
+            <field name="children">2</field>
+            <field name="km_home_work">10</field>
+            <!-- Nouveaux champs -->
+            <field name="gender">female</field>
+            <field name="marital">married</field>
+            <field name="certificate">master</field>
+            <!-- Predicted risk pour démo -->
+            <field name="predicted_risk">medium</field>
+        </record>
+        <record id="demo_contract_fatma" model="hr.contract">
+            <field name="name">Contract Fatma</field>
+            <field name="date_start">2019-03-15</field>
+            <field name="employee_id" ref="demo_emp_fatma"/>
+            <field name="job_id" ref="demo_job_developer"/>
+            <field name="department_id" ref="demo_dep_finance"/>
+            <field name="wage">5000.0</field>
+            <field name="state">open</field>
+            <field name="hr_responsible_id" ref="base.user_admin"/>
+        </record>
+        <record id="demo_att_fatma_1" model="hr.attendance">
+            <field name="employee_id" ref="demo_emp_fatma"/>
+            <field name="check_in">2025-05-05 09:00:00</field>
+            <field name="check_out">2025-05-05 17:00:00</field>
+        </record>
+        <record id="demo_att_fatma_2" model="hr.attendance">
+            <field name="employee_id" ref="demo_emp_fatma"/>
+            <field name="check_in">2025-05-06 08:30:00</field>
+            <field name="check_out">2025-05-06 16:30:00</field>
+        </record>
+
+        <!-- Iheb – télétravail, 0 enfant, km_home_work=5, Manager (responsable RH) -->
+        <record id="demo_part_iheb" model="res.partner">
+            <field name="name">Iheb</field>
+            <field name="email">iheb@example.com</field>
+        </record>
+        <record id="demo_user_iheb" model="res.users">
+            <field name="name">Iheb</field>
+            <field name="login">iheb</field>
+            <field name="password">risk</field>
+            <field name="partner_id" ref="demo_part_iheb"/>
+            <field name="email">iheb@example.com</field>
+            <field name="share">False</field>
+            <field name="groups_id" eval="[
+        (4, ref('base.group_user')),
+      (4, ref('risk_prediction.group_rh_risk')),
+    (4, ref('survey.group_survey_user'))
+      ]"/>
+        </record>
+        <record id="demo_emp_iheb" model="hr.employee">
+            <field name="name">Iheb</field>
+            <field name="user_id" ref="demo_user_iheb"/>
+            <field name="work_email">iheb@example.com</field>
+            <field name="department_id" ref="demo_dep_it"/>
+            <field name="work_location_id" ref="demo_loc_home"/>
+            <field name="birthday">1990-11-23</field>
+            <field name="children">0</field>
+            <field name="km_home_work">5</field>
+            <!-- Nouveaux champs -->
+            <field name="gender">male</field>
+            <field name="marital">single</field>
+            <field name="certificate">bachelor</field>
+            <!-- Iheb est responsable RH : risk faible -->
+            <field name="predicted_risk">low</field>
+        </record>
+        <record id="demo_contract_iheb" model="hr.contract">
+            <field name="name">Contract Iheb</field>
+            <field name="date_start">2021-07-01</field>
+            <field name="employee_id" ref="demo_emp_iheb"/>
+            <field name="job_id" ref="demo_job_manager"/>
+            <field name="department_id" ref="demo_dep_it"/>
+            <field name="wage">3000.0</field>
+            <field name="state">open</field>
+            <field name="hr_responsible_id" ref="base.user_admin"/>
+        </record>
+        <record id="demo_att_iheb_1" model="hr.attendance">
+            <field name="employee_id" ref="demo_emp_iheb"/>
+            <field name="check_in">2025-05-05 10:00:00</field>
+            <field name="check_out">2025-05-05 18:00:00</field>
+        </record>
+        <record id="demo_att_iheb_2" model="hr.attendance">
+            <field name="employee_id" ref="demo_emp_iheb"/>
+            <field name="check_in">2025-05-06 09:15:00</field>
+            <field name="check_out">2025-05-06 17:15:00</field>
+        </record>
+
+        <!-- Carol – bureau, 1 enfant, km_home_work=20, Developer -->
+        <record id="demo_part_carol" model="res.partner">
+            <field name="name">Carol</field>
+            <field name="email">carol@example.com</field>
+        </record>
+        <record id="demo_user_carol" model="res.users">
+            <field name="name">Carol</field>
+            <field name="login">carol</field>
+            <field name="password">risk</field>
+            <field name="partner_id" ref="demo_part_carol"/>
+            <field name="email">carol.nguyen@example.com</field>
+            <field name="share">False</field>
+            <field name="groups_id" eval="[
+        (4, ref('base.group_user')),
+        (4, ref('risk_prediction.group_emp_risk'))
+      ]"/>
+        </record>
+        <record id="demo_emp_carol" model="hr.employee">
+            <field name="name">Carol</field>
+            <field name="user_id" ref="demo_user_carol"/>
+            <field name="work_email">carol@example.com</field>
+            <field name="department_id" ref="demo_dep_finance"/>
+            <field name="work_location_id" ref="demo_loc_office"/>
+            <field name="birthday">1985-01-15</field>
+            <field name="children">1</field>
+            <field name="km_home_work">20</field>
+            <field name="gender">female</field>
+            <field name="marital">married</field>
+            <field name="certificate">bachelor</field>
+            <field name="predicted_risk">low</field>
+        </record>
+        <record id="demo_contract_carol" model="hr.contract">
+            <field name="name">Contract Carol</field>
+            <field name="date_start">2023-10-01</field>
+            <field name="employee_id" ref="demo_emp_carol"/>
+            <field name="job_id" ref="demo_job_developer"/>
+            <field name="department_id" ref="demo_dep_finance"/>
+            <field name="wage">4500.0</field>
+            <field name="state">open</field>
+            <field name="hr_responsible_id" ref="base.user_admin"/>
+        </record>
+        <record id="demo_att_carol_1" model="hr.attendance">
+            <field name="employee_id" ref="demo_emp_carol"/>
+            <field name="check_in">2025-05-05 09:30:00</field>
+            <field name="check_out">2025-05-05 18:00:00</field>
+        </record>
+        <record id="demo_att_carol_2" model="hr.attendance">
+            <field name="employee_id" ref="demo_emp_carol"/>
+            <field name="check_in">2025-05-06 08:45:00</field>
+            <field name="check_out">2025-05-06 17:15:00</field>
+        </record>
+
+        <!-- Khayri – télétravail, 3 enfants, km_home_work=15, Manager -->
+        <record id="demo_part_khayri" model="res.partner">
+            <field name="name">Khayri</field>
+            <field name="email">khayri@example.com</field>
+        </record>
+        <record id="demo_user_khayri" model="res.users">
+            <field name="name">Khayri</field>
+            <field name="login">khayri</field>
+            <field name="password">risk</field>
+            <field name="partner_id" ref="demo_part_khayri"/>
+            <field name="email">khayri@example.com</field>
+            <field name="share">False</field>
+            <field name="groups_id" eval="[
+        (4, ref('base.group_user')),
+        (4, ref('risk_prediction.group_emp_risk'))
+      ]"/>
+        </record>
+        <record id="demo_emp_khayri" model="hr.employee">
+            <field name="name">Khayri</field>
+            <field name="user_id" ref="demo_user_khayri"/>
+            <field name="work_email">khayri@example.com</field>
+            <field name="department_id" ref="demo_dep_it"/>
+            <field name="work_location_id" ref="demo_loc_home"/>
+            <field name="birthday">1978-09-07</field>
+            <field name="children">3</field>
+            <field name="km_home_work">15</field>
+            <field name="gender">male</field>
+            <field name="marital">married</field>
+            <field name="certificate">graduate</field>
+            <field name="predicted_risk">high</field>
+        </record>
+        <record id="demo_contract_khayri" model="hr.contract">
+            <field name="name">Contract Khayri</field>
+            <field name="date_start">2010-05-20</field>
+            <field name="employee_id" ref="demo_emp_khayri"/>
+            <field name="job_id" ref="demo_job_manager"/>
+            <field name="department_id" ref="demo_dep_it"/>
+            <field name="wage">6000.0</field>
+            <field name="state">open</field>
+            <field name="hr_responsible_id" ref="base.user_admin"/>
+        </record>
+        <record id="demo_att_khayri_1" model="hr.attendance">
+            <field name="employee_id" ref="demo_emp_khayri"/>
+            <field name="check_in">2025-05-05 08:00:00</field>
+            <field name="check_out">2025-05-05 16:00:00</field>
+        </record>
+        <record id="demo_att_khayri_2" model="hr.attendance">
+            <field name="employee_id" ref="demo_emp_khayri"/>
+            <field name="check_in">2025-05-06 09:00:00</field>
+            <field name="check_out">2025-05-06 17:00:00</field>
+        </record>
+
+        <!-- Aya – télétravail, 0 enfant, km_home_work=8, Developer -->
+        <record id="demo_part_aya" model="res.partner">
+            <field name="name">Aya</field>
+            <field name="email">aya@example.com</field>
+        </record>
+        <record id="demo_user_aya" model="res.users">
+            <field name="name">Aya</field>
+            <field name="login">aya</field>
+            <field name="password">risk</field>
+            <field name="partner_id" ref="demo_part_aya"/>
+            <field name="email">aya@example.com</field>
+            <field name="share">False</field>
+            <field name="groups_id" eval="[
+        (4, ref('base.group_user')),
+        (4, ref('risk_prediction.group_emp_risk'))
+      ]"/>
+        </record>
+        <record id="demo_emp_aya" model="hr.employee">
+            <field name="name">Aya</field>
+            <field name="user_id" ref="demo_user_aya"/>
+            <field name="work_email">aya@example.com</field>
+            <field name="department_id" ref="demo_dep_finance"/>
+            <field name="work_location_id" ref="demo_loc_home"/>
+            <field name="birthday">1992-02-28</field>
+            <field name="children">0</field>
+            <field name="km_home_work">8</field>
+            <field name="gender">female</field>
+            <field name="marital">single</field>
+            <field name="certificate">bachelor</field>
+            <field name="predicted_risk">high</field>
+        </record>
+        <record id="demo_contract_aya" model="hr.contract">
+            <field name="name">Contract Aya</field>
+            <field name="date_start">2015-02-01</field>
+            <field name="employee_id" ref="demo_emp_aya"/>
+            <field name="job_id" ref="demo_job_developer"/>
+            <field name="department_id" ref="demo_dep_finance"/>
+            <field name="wage">3500.0</field>
+            <field name="state">open</field>
+            <field name="hr_responsible_id" ref="base.user_admin"/>
+        </record>
+        <record id="demo_att_aya_1" model="hr.attendance">
+            <field name="employee_id" ref="demo_emp_aya"/>
+            <field name="check_in">2025-05-05 09:15:00</field>
+            <field name="check_out">2025-05-05 17:15:00</field>
+        </record>
+        <record id="demo_att_aya_2" model="hr.attendance">
+            <field name="employee_id" ref="demo_emp_aya"/>
+            <field name="check_in">2025-05-06 10:00:00</field>
+            <field name="check_out">2025-05-06 18:00:00</field>
+        </record>
+
+    </data>
+</odoo>

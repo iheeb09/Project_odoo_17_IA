@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="survey_category_tags" model="ir.ui.view">
+            <field name="name">risk_prediction.survey.question.form.category.tags</field>
+            <field name="model">survey.question</field>
+            <field name="inherit_id" ref="survey.survey_question_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//field[@name='title']" position="after">
+                    <field name="category_ids"
+                           widget="many2many_tags"
+                           options="{'color_field':'color','no_create_edit':True}"
+                           placeholder="Tags"
+                    />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

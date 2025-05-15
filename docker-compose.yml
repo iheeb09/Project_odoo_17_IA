@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    ports:
+      - "5430:5432"
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+    networks:
+      - my-network
+    restart: always
+
+  odoo:
+    image: odoo:17
+    build:
+      context: ./odoo
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      - ./odoo/config:/etc/odoo
+      - ./odoo/custom_addons:/mnt/custom-addons
+      - ./odoo-source:/odoo
+      - ./logs/odoo:/var/log/odoo
+      - odoo-data:/var/lib/odoo
+    command: >
+      odoo -c /etc/odoo/odoo.conf --dev=all
+    networks:
+      - my-network
+    restart: always
+
+  fastapi:
+    build: ./fastapi_ai
+    container_name: fastapicv
+    ports:
+      - "8045:8045"
+    networks:
+      - my-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8045
+    restart: always
+
+  fastapir:
+    build:
+      context: ./fastapi_risk_api
+      dockerfile: Dockerfile
+
+    container_name: fastapir
+    depends_on:
+      - db
+    ports:
+      - "8020:8020"
+    networks:
+      - my-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8020
+    restart: always
+
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  odoo-db-data:
+  odoo-data:

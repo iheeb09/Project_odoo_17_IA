@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_server_predict_all_risks" model="ir.actions.server">
+        <field name="name">Predict Risk</field>
+
+        <!-- modèle concerné -->
+        <field name="model_id"         ref="hr.model_hr_employee"/>
+        <field name="binding_model_id" ref="hr.model_hr_employee"/>
+        <field name="groups_id" eval="[(4, ref('risk_prediction.group_rh_risk'))]"/>
+        <!-- rendu dans Liste (tree) ET Forme (form) -->
+        <field name="binding_type">action</field>
+
+        <!-- code python -->
+        <field name="state">code</field>
+        <field name="code"><![CDATA[
+for rec in records:
+    rec.predict_risk_for_employees()
+]]></field>
+    </record>
+</odoo>

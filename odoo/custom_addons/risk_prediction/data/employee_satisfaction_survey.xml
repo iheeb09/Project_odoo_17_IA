@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <!-- 1) Le survey en mode “une question par page” -->
+    <record id="survey_employee_satisfaction" model="survey.survey">
+      <field name="title">Employee Satisfaction Survey</field>
+      <field name="access_mode">public</field>
+      <field name="scoring_type">scoring_with_answers</field>
+      <field name="questions_layout">page_per_question</field>
+    </record>
+
+    <!-- 2) Section 1 : Job Satisfaction -->
+    <record id="question_job_satisfaction_1" model="survey.question">
+      <field name="survey_id" ref="survey_employee_satisfaction"/>
+      <field name="title">How satisfied are you with your current role?</field>
+      <field name="question_type">simple_choice</field>
+      <field name="category_ids" eval="[(6, 0, [ref('risk_prediction.cat_job_satisfaction')])]"/>
+      <field name="sequence">1</field>
+    </record>
+    <record id="answer_job_satisfaction_1_1" model="survey.question.answer">
+      <field name="question_id" ref="question_job_satisfaction_1"/>
+      <field name="value">Dissatisfied</field>
+      <field name="score">25.0</field>
+      <field name="sequence">1</field>
+    </record>
+    <record id="answer_job_satisfaction_1_2" model="survey.question.answer">
+      <field name="question_id" ref="question_job_satisfaction_1"/>
+      <field name="value">Neutral</field>
+      <field name="score">50.0</field>
+      <field name="sequence">2</field>
+    </record>
+    <record id="answer_job_satisfaction_1_3" model="survey.question.answer">
+      <field name="question_id" ref="question_job_satisfaction_1"/>
+      <field name="value">Satisfied</field>
+      <field name="score">75.0</field>
+      <field name="sequence">3</field>
+    </record>
+    <record id="answer_job_satisfaction_1_4" model="survey.question.answer">
+      <field name="question_id" ref="question_job_satisfaction_1"/>
+      <field name="value">Very Satisfied</field>
+      <field name="score">100.0</field>
+      <field name="sequence">4</field>
+    </record>
+
+    <record id="question_job_satisfaction_2" model="survey.question">
+      <field name="survey_id" ref="survey_employee_satisfaction"/>
+      <field name="title">Do you feel your role matches your skills?</field>
+      <field name="question_type">simple_choice</field>
+      <field name="category_ids" eval="[(6, 0, [ref('risk_prediction.cat_job_satisfaction')])]"/>
+      <field name="sequence">2</field>
+    </record>
+    <record id="answer_job_satisfaction_2_1" model="survey.question.answer">
+      <field name="question_id" ref="question_job_satisfaction_2"/>
+      <field name="value">Somewhat</field>
+      <field name="score">25.0</field>
+      <field name="sequence">1</field>
+    </record>
+    <record id="answer_job_satisfaction_2_2" model="survey.question.answer">
+      <field name="question_id" ref="question_job_satisfaction_2"/>
+      <field name="value">Mostly</field>
+      <field name="score">50.0</field>
+      <field name="sequence">2</field>
+    </record>
+    <record id="answer_job_satisfaction_2_3" model="survey.question.answer">
+      <field name="question_id" ref="question_job_satisfaction_2"/>
+      <field name="value">Very Much</field>
+      <field name="score">75.0</field>
+      <field name="sequence">3</field>
+    </record>
+    <record id="answer_job_satisfaction_2_4" model="survey.question.answer">
+      <field name="question_id" ref="question_job_satisfaction_2"/>
+      <field name="value">Completely</field>
+      <field name="score">100.0</field>
+      <field name="sequence">4</field>
+    </record>
+
+    <!-- 3) Section 2 : Work–Life Balance -->
+    <record id="question_work_life_balance_1" model="survey.question">
+      <field name="survey_id" ref="survey_employee_satisfaction"/>
+      <field name="title">How do you perceive your work–life balance?</field>
+      <field name="question_type">simple_choice</field>
+      <field name="category_ids" eval="[(6, 0, [ref('risk_prediction.cat_work_life_balance')])]"/>
+      <field name="sequence">3</field>
+    </record>
+    <record id="answer_work_life_balance_1_1" model="survey.question.answer">
+      <field name="question_id" ref="question_work_life_balance_1"/>
+      <field name="value">Poor</field>
+      <field name="score">25.0</field>
+      <field name="sequence">1</field>
+    </record>
+    <record id="answer_work_life_balance_1_2" model="survey.question.answer">
+      <field name="question_id" ref="question_work_life_balance_1"/>
+      <field name="value">Fair</field>
+      <field name="score">50.0</field>
+      <field name="sequence">2</field>
+    </record>
+    <record id="answer_work_life_balance_1_3" model="survey.question.answer">
+      <field name="question_id" ref="question_work_life_balance_1"/>
+      <field name="value">Good</field>
+      <field name="score">75.0</field>
+      <field name="sequence">3</field>
+    </record>
+    <record id="answer_work_life_balance_1_4" model="survey.question.answer">
+      <field name="question_id" ref="question_work_life_balance_1"/>
+      <field name="value">Excellent</field>
+      <field name="score">100.0</field>
+      <field name="sequence">4</field>
+    </record>
+
+    <record id="question_work_life_balance_2" model="survey.question">
+      <field name="survey_id" ref="survey_employee_satisfaction"/>
+      <field name="title">Do you have enough time for personal activities?</field>
+      <field name="question_type">simple_choice</field>
+      <field name="category_ids" eval="[(6, 0, [ref('risk_prediction.cat_work_life_balance')])]"/>
+      <field name="sequence">4</field>
+    </record>
+    <record id="answer_work_life_balance_2_1" model="survey.question.answer">
+      <field name="question_id" ref="question_work_life_balance_2"/>
+      <field name="value">Rarely</field>
+      <field name="score">25.0</field>
+      <field name="sequence">1</field>
+    </record>
+    <record id="answer_work_life_balance_2_2" model="survey.question.answer">
+      <field name="question_id" ref="question_work_life_balance_2"/>
+      <field name="value">Sometimes</field>
+      <field name="score">50.0</field>
+      <field name="sequence">2</field>
+    </record>
+    <record id="answer_work_life_balance_2_3" model="survey.question.answer">
+      <field name="question_id" ref="question_work_life_balance_2"/>
+      <field name="value">Often</field>
+      <field name="score">75.0</field>
+      <field name="sequence">3</field>
+    </record>
+    <record id="answer_work_life_balance_2_4" model="survey.question.answer">
+      <field name="question_id" ref="question_work_life_balance_2"/>
+      <field name="value">Always</field>
+      <field name="score">100.0</field>
+      <field name="sequence">4</field>
+    </record>
+
+    <!-- 4) Section 3 : Leadership Opportunities -->
+    <record id="question_leadership_opportunities_1" model="survey.question">
+      <field name="survey_id" ref="survey_employee_satisfaction"/>
+      <field name="title">Do you have opportunities to grow as a leader?</field>
+      <field name="question_type">simple_choice</field>
+      <field name="category_ids" eval="[(6, 0, [ref('risk_prediction.cat_leadership_opportunities')])]"/>
+      <field name="sequence">5</field>
+    </record>
+    <record id="answer_leadership_opportunities_1_1" model="survey.question.answer">
+      <field name="question_id" ref="question_leadership_opportunities_1"/>
+      <field name="value">No</field>
+      <field name="score">0.0</field>
+      <field name="sequence">1</field>
+    </record>
+    <record id="answer_leadership_opportunities_1_2" model="survey.question.answer">
+      <field name="question_id" ref="question_leadership_opportunities_1"/>
+      <field name="value">Yes</field>
+      <field name="score">100.0</field>
+      <field name="sequence">2</field>
+    </record>
+
+    <!-- 5) Section 4 : Innovation Opportunities -->
+    <record id="question_innovation_opportunities_1" model="survey.question">
+      <field name="survey_id" ref="survey_employee_satisfaction"/>
+      <field name="title">Are you encouraged to innovate in your role?</field>
+      <field name="question_type">simple_choice</field>
+      <field name="category_ids" eval="[(6, 0, [ref('risk_prediction.cat_innovation_opportunities')])]"/>
+      <field name="sequence">6</field>
+    </record>
+    <record id="answer_innovation_opportunities_1_1" model="survey.question.answer">
+      <field name="question_id" ref="question_innovation_opportunities_1"/>
+      <field name="value">No</field>
+      <field name="score">0.0</field>
+      <field name="sequence">1</field>
+    </record>
+    <record id="answer_innovation_opportunities_1_2" model="survey.question.answer">
+      <field name="question_id" ref="question_innovation_opportunities_1"/>
+      <field name="value">Yes</field>
+      <field name="score">100.0</field>
+      <field name="sequence">2</field>
+    </record>
+
+    <!-- 6) Section 5 : Company Reputation -->
+    <record id="question_company_reputation_1" model="survey.question">
+      <field name="survey_id" ref="survey_employee_satisfaction"/>
+      <field name="title">How do you rate the company's reputation?</field>
+      <field name="question_type">simple_choice</field>
+      <field name="category_ids" eval="[(6, 0, [ref('risk_prediction.cat_company_reputation')])]"/>
+      <field name="sequence">7</field>
+    </record>
+    <record id="answer_company_reputation_1_1" model="survey.question.answer">
+      <field name="question_id" ref="question_company_reputation_1"/>
+      <field name="value">Poor</field>
+      <field name="score">25.0</field>
+      <field name="sequence">1</field>
+    </record>
+    <record id="answer_company_reputation_1_2" model="survey.question.answer">
+      <field name="question_id" ref="question_company_reputation_1"/>
+      <field name="value">Fair</field>
+      <field name="score">50.0</field>
+      <field name="sequence">2</field>
+    </record>
+    <record id="answer_company_reputation_1_3" model="survey.question.answer">
+      <field name="question_id" ref="question_company_reputation_1"/>
+      <field name="value">Good</field>
+      <field name="score">75.0</field>
+      <field name="sequence">3</field>
+    </record>
+    <record id="answer_company_reputation_1_4" model="survey.question.answer">
+      <field name="question_id" ref="question_company_reputation_1"/>
+      <field name="value">Excellent</field>
+      <field name="score">100.0</field>
+      <field name="sequence">4</field>
+    </record>
+
+    <!-- 7) Section 6 : Employee Recognition -->
+    <record id="question_employee_recognition_1" model="survey.question">
+      <field name="survey_id" ref="survey_employee_satisfaction"/>
+      <field name="title">How well are your efforts recognized?</field>
+      <field name="question_type">simple_choice</field>
+      <field name="category_ids" eval="[(6, 0, [ref('risk_prediction.cat_employee_recognition')])]"/>
+      <field name="sequence">8</field>
+    </record>
+    <record id="answer_employee_recognition_1_1" model="survey.question.answer">
+      <field name="question_id" ref="question_employee_recognition_1"/>
+      <field name="value">Rarely</field>
+      <field name="score">25.0</field>
+      <field name="sequence">1</field>
+    </record>
+    <record id="answer_employee_recognition_1_2" model="survey.question.answer">
+      <field name="question_id" ref="question_employee_recognition_1"/>
+      <field name="value">Sometimes</field>
+      <field name="score">50.0</field>
+      <field name="sequence">2</field>
+    </record>
+    <record id="answer_employee_recognition_1_3" model="survey.question.answer">
+      <field name="question_id" ref="question_employee_recognition_1"/>
+      <field name="value">Often</field>
+      <field name="score">75.0</field>
+      <field name="sequence">3</field>
+    </record>
+    <record id="answer_employee_recognition_1_4" model="survey.question.answer">
+      <field name="question_id" ref="question_employee_recognition_1"/>
+      <field name="value">Always</field>
+      <field name="score">100.0</field>
+      <field name="sequence">4</field>
+    </record>
+  </data>
+</odoo>

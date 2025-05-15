@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- =========================== -->
+    <!-- 1) TREE VIEW + bouton       -->
+    <!-- =========================== -->
+    <record id="view_hr_employee_tree" model="ir.ui.view">
+        <field name="name">hr.employee.tree.predict.risk</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="replace">
+                <tree string="Employees"
+                      default_order="predicted_risk desc"
+                      decoration-danger="predicted_risk == 'high'"
+                      decoration-warning="predicted_risk == 'medium'"
+                      decoration-success="predicted_risk == 'low'">
+
+                    <header>
+                        <button name="predict_risk_for_employees"
+                                type="object"
+                                string="Predict Risk"
+                                class="btn-primary"
+                                icon="fa-bolt"/>
+                    </header>
+
+                    <field name="name"/>
+                    <field name="work_email" widget="email"/>
+                    <field name="first_contract_date"/>
+                    <field name="department_id"/>
+                    <field name="job_title"/>
+                    <field name="predicted_risk" widget="badge"
+                           options="{
+                               'style':'binary',
+                               'danger':['high'],
+                               'warning':['medium'],
+                               'success':['low']
+                           }"/>
+                </tree>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- =========================== -->
+    <!-- 2) SEARCH VIEW              -->
+    <!-- =========================== -->
+    <record id="hr_employee_filter_risk" model="ir.ui.view">
+        <field name="name">hr.employee.risk.filters</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter string="High Risk" name="high_risk" domain="[('predicted_risk','=','high')]"/>
+                <filter string="Medium Risk" name="medium_risk" domain="[('predicted_risk','=','medium')]"/>
+                <filter string="Low Risk" name="low_risk" domain="[('predicted_risk','=','low')]"/>
+                <filter string="High Salary" name="high_income" domain="[('monthly_income','>=',5000)]"/>
+                <separator/>
+                <group expand="1" string="Group By">
+                    <filter name="group_by_risk"
+                            string="Predicted Risk"
+                            context="{'group_by':'predicted_risk'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- =========================== -->
+    <!--FORM VIEW                -->
+    <!-- =========================== -->
+    <record id="hr_employee_form_risk" model="ir.ui.view">
+        <field name="name">hr.employee.form.risk</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <!--  Ajout des onglets -->
+            <xpath expr="//sheet/notebook" position="inside">
+                <!-- ONGLET 1 : Profile -->
+                <page name="profile" string="Profile">
+                    <group>
+                        <group string="Personal Information">
+                            <field name="gender"/>
+                            <field name="birthday"/>
+                            <field name="age"/>
+                        </group>
+                        <group string="Family &amp; Education">
+                            <field name="marital"/>
+                            <field name="children"/>
+                            <field name="certificate"/>
+                            <field name="km_home_work"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Position">
+                            <field name="job_level" readonly="1"/>
+                            <field name="years_at_company" readonly="1"/>
+                        </group>
+                        <group string="Work Metrics">
+                            <field name="work_hours_week" readonly="1"/>
+                            <field name="overTime" readonly="1"/>
+                            <field name="remote_work" readonly="1"/>
+                            <field name="work_location_id"/>
+
+                            <field name="company_size" readonly="1"/>
+                        </group>
+                        <group string="Contract">
+                            <field name="contract_status" widget="statusbar" statusbar_visible="new,running,expired"/>
+                            <field name="monthly_income" readonly="1"/>
+                            <field name="number_of_promotions" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+
+                <!-- ONGLET 3 : Evaluation -->
+                <page name="evaluation" string="Evaluation">
+                    <group>
+                        <group string="Result">
+
+                            <field name="predicted_risk" readonly="1"
+                                   decoration-danger="predicted_risk == 'high'"
+                                   decoration-warning="predicted_risk == 'medium'"
+                                   decoration-success="predicted_risk == 'low'"/>
+
+                            <field name="progress_html" widget="html" readonly="1"/>
+                        </group>
+                        <group string="Satisfaction">
+                            <field name="job_satisfaction" readonly="1"/>
+                            <field name="work_life_balance" readonly="1"/>
+                        </group>
+                        <group string="Opportunities">
+                            <field name="leadership_opportunities" readonly="1"/>
+                            <field name="innovation_opportunities" readonly="1"/>
+                        </group>
+                        <group string="">
+                            <field name="company_reputation" readonly="1"/>
+                            <field name="employee_recognition" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="performance_rating"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="history" string="Evaluation History">
+                    <field name="historic_detaill"
+                           widget="one2many_list"
+                           readonly="1">
+                        <tree editable="false">
+                            <field name="date" string="Response Date"/>
+                            <field name="job_satis" string="Job Satisfaction"/>
+                            <field name="work_life" string="Work–Life Balance"/>
+                            <field name="performance" string="Performance"/>
+                            <field name="leadership_opport" string="Leadership Opportunities"/>
+                            <field name="innovation_opport" string="Innovation Opportunities"/>
+                            <field name="company_reput" string="Company Reputation"/>
+                            <field name="employee_recog" string="Employee Recognition"/>
+                            <field name="pred_risk" string="Predicted Risk"/>
+                        </tree>
+                    </field>
+                </page>
+
+
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

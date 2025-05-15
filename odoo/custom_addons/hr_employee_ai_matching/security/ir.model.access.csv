@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_matching_job,hr.matching.job,model_hr_matching_job,,1,1,1,1
+access_hr_matching_cv,hr.matching.cv,model_hr_matching_cv,,1,1,1,1
+access_hr_matching_result,hr.matching.result,model_hr_matching_result,,1,1,1,1
