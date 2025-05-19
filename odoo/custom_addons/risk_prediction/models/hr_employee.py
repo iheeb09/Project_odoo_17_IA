@@ -126,12 +126,7 @@ class HrEmployee(models.Model):
     historic_detaill = fields.One2many('historique.evaluation', 'historic_id', string='Historic', invisible="1")
     # ==================================================================
     # Champs numériques totaux
-    job_satisfaction_total = fields.Float(string='Total Job Satisfaction Score', readonly=True)
-    work_life_balance_total = fields.Float(string='Total Work-Life Balance Score', readonly=True)
-    leadership_opportunities_total = fields.Float(string='Total Leadership Opportunities Score', readonly=True)
-    innovation_opportunities_total = fields.Float(string='Total Innovation Opportunities Score', readonly=True)
-    company_reputation_total = fields.Float(string='Total Company Reputation Score', readonly=True)
-    employee_recognition_total = fields.Float(string='Total Employee Recognition Score', readonly=True)
+
 
 
     # ==================================================================
@@ -281,7 +276,7 @@ class HrEmployee(models.Model):
             if rec.historic_detaill:
                 sorted_hist = rec.historic_detaill.sorted(
                     key=lambda h: h.date or h.create_date,
-                    reverse=False
+                    reverse=True
                 )
                 if sorted_hist:
                     last_hist = sorted_hist[0]
@@ -320,54 +315,3 @@ class HrEmployee(models.Model):
             "male": "Male", "female": "Female"
         }.get(value and value.lower(), default)
 
-
-class HistoricEvaluation(models.Model):
-    _name = 'historique.evaluation'
-    _description = 'Evaluation History'
-
-    name = fields.Char(string="Référence")
-    date = fields.Datetime(string="Response Date", readonly=True)
-    job_satis = fields.Selection(
-        [
-            ('low', 'Low'),
-            ('medium', 'Medium'),
-            ('high', 'High'),
-            ('very_high', 'Very High'),
-        ],
-        string="Job Satisfaction",
-        store=True,
-    )
-    work_life = fields.Selection(
-        [
-            ('poor', 'Poor'), ('fair', 'Fair'), ('good', 'Good'), ('excellent', 'Excellent')
-        ],
-        string="Work-Life Balance"
-    )
-    performance = fields.Selection(
-        [('low', 'Low'), ('below_average', 'Below Average'),
-         ('average', 'Average'), ('high', 'High')],
-        string="Performance Rating"
-    )
-    leadership_opport = fields.Selection(
-        [('yes', 'Yes'), ('no', 'No')],
-        string="Leadership Opportunities"
-    )
-    innovation_opport = fields.Selection(
-        [('yes', 'Yes'), ('no', 'No')],
-        string="Innovation Opportunities"
-    )
-    company_reput = fields.Selection(
-        [('poor', 'Poor'), ('fair', 'Fair'), ('good', 'Good'), ('excellent', 'Excellent')],
-        string="Company Reputation"
-    )
-    employee_recog = fields.Selection(
-        [('low', 'Low'), ('medium', 'Medium'), ('high', 'High'), ('very_high', 'Very High')],
-        string="Employee Recognition"
-    )
-
-    #  Risque prédit via FastAPI
-    pred_risk = fields.Selection(
-        [('low', 'Low'), ('medium', 'Medium'), ('high', 'High'), ('undefined', 'Undefined')],
-        string="Predicted Risk", readonly=True
-    )
-    historic_id = fields.Many2one('hr.employee', string="Employe")

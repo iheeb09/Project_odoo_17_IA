@@ -4,10 +4,7 @@ from odoo import models, api, fields
 
 _logger = logging.getLogger(__name__)
 
-class SurveyQuestionAnswer(models.Model):
-    _inherit = 'survey.question.answer'
 
-    score = fields.Float(string="Score", default=0.0)
 
 class SurveyUserInput(models.Model):
     _inherit = 'survey.user_input'
@@ -122,7 +119,7 @@ class SurveyUserInput(models.Model):
         for label, data in results.items():
             field_key = label_to_field[label]
             if question_counts[label] > 0:
-                updates[f"{field_key}_total"] = data['total']
+
                 updates[field_key] = data['level']
 
         # 6) Mise à jour de l'employé et message
@@ -153,7 +150,7 @@ class SurveyUserInput(models.Model):
             'historic_id': emp.id,
             'job_satis': updates.get('job_satisfaction'),
             'work_life': updates.get('work_life_balance'),
-            #'performance':emp.performance_rating,
+
             'leadership_opport': updates.get('leadership_opportunities'),
             'innovation_opport': updates.get('innovation_opportunities'),
             'company_reput': updates.get('company_reputation'),
