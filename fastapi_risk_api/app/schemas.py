@@ -9,7 +9,6 @@ class EmployeeFeatures(BaseModel):
     distance_from_home: int
     number_of_promotions: int
     number_of_dependents: int
-    #company_tenure: int
     job_level: Literal["Entry", "Mid", "Senior"]
     company_size: Literal["Small", "Medium", "Large"]
     education_level: Literal["High School", "Associate Degree", "Bachelor’s Degree", "Master’s Degree", "PhD"]
