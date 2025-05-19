@@ -1,7 +1,7 @@
 import joblib
 from pathlib import Path
 import pandas as pd
-import numpy as np
+
 
 # Configuration
 MODEL_DIR = Path("model")

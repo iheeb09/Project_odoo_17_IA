@@ -6,7 +6,7 @@ WORKDIR /app
 # Copie requirements
 COPY requirements.txt .
 
-# 🛠️ Installation sécurisée des dépendances
+#  Installation sécurisée des dépendances
 RUN apt-get update --allow-releaseinfo-change && apt-get install -y --no-install-recommends \
     build-essential \
     libglib2.0-0 \

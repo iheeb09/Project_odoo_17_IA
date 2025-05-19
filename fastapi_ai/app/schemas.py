@@ -1,10 +1,7 @@
 from pydantic import BaseModel
 from typing import List
 
-# Pour /match : un seul CV
-class MatchRequest(BaseModel):
-    cv_text: str
-    job_description: str
+
 
 # Pour /match/multiple : plusieurs CVs
 class CVItem(BaseModel):
@@ -12,10 +9,14 @@ class CVItem(BaseModel):
     text: str
 
 class MatchMultipleRequest(BaseModel):
-    job_description: str
-    cvs: List[CVItem]
+
+    job_description: str #Le texte de la description du poste.
+    cvs: List[CVItem] #Liste de dictionnaires contenant le nom et le texte de chaque CV.
 
 # Réponse standard
 class MatchResult(BaseModel):
+    # Liste de dictionnaires avec le nom du CV et le score de similarité,triée par score décroissant
+
+
     cv_name: str
     score: float

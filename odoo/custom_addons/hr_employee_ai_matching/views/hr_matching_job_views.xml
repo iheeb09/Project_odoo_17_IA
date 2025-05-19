@@ -19,7 +19,7 @@
         <field name="name">hr.matching.job.form</field>
         <field name="model">hr.matching.job</field>
         <field name="arch" type="xml">
-            <form string="HR IA Matching Job ">
+            <form >
                 <header>
                     <button name="action_compute_matching" string="Run IA Matching"
                             type="object" class="btn-primary"/>
