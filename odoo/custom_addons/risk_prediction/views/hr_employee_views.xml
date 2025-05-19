@@ -144,15 +144,15 @@
                            widget="one2many_list"
                            readonly="1">
                         <tree editable="false">
-                            <field name="date" string="Response Date"/>
-                            <field name="job_satis" string="Job Satisfaction"/>
-                            <field name="work_life" string="Work–Life Balance"/>
-                            <field name="performance" string="Performance"/>
-                            <field name="leadership_opport" string="Leadership Opportunities"/>
-                            <field name="innovation_opport" string="Innovation Opportunities"/>
-                            <field name="company_reput" string="Company Reputation"/>
-                            <field name="employee_recog" string="Employee Recognition"/>
-                            <field name="pred_risk" string="Predicted Risk"/>
+                            <field name="date" />
+                            <field name="job_satis" />
+                            <field name="work_life" />
+                            <field name="performance" />
+                            <field name="leadership_opport" />
+                            <field name="innovation_opport" />
+                            <field name="company_reput" />
+                            <field name="employee_recog" />
+                            <field name="pred_risk" />
                         </tree>
                     </field>
                 </page>

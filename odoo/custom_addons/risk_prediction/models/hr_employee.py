@@ -133,15 +133,7 @@ class HrEmployee(models.Model):
     company_reputation_total = fields.Float(string='Total Company Reputation Score', readonly=True)
     employee_recognition_total = fields.Float(string='Total Employee Recognition Score', readonly=True)
 
-    def write_survey_scores(self, updates):
-        """
-        Écrit les scores passés dans `updates` et poste un message dans le chatter.
 
-        """
-        for employee in self:
-            if not updates:
-                continue
-            employee.sudo().write(updates)
     # ==================================================================
 
     @api.depends('birthday')
@@ -240,7 +232,9 @@ class HrEmployee(models.Model):
         et met à jour le champ predicted_risk.
         """
         url = "http://fastapir:8020/predict"
-        valid_keys = [k for k, _ in self._fields['predicted_risk'].selection]
+        valid_keys = []
+        for k, _ in self._fields['predicted_risk'].selection:
+            valid_keys.append(k)
 
         for rec in self:
             payload = {
@@ -282,10 +276,16 @@ class HrEmployee(models.Model):
                 # 1) Met à jour l’employé
             rec.predicted_risk = risk
 
-            # 2) Met à jour la dernière ligne de l’historique
-            last_hist = rec.historic_detaill and rec.historic_detaill.sorted(
-                key=lambda h: h.date or h.create_date, reverse=True
-            )[0]
+            #  tri enregistrement par date
+            last_hist = None
+            if rec.historic_detaill:
+                sorted_hist = rec.historic_detaill.sorted(
+                    key=lambda h: h.date or h.create_date,
+                    reverse=False
+                )
+                if sorted_hist:
+                    last_hist = sorted_hist[0]
+            # Met à jour la dernière ligne de l’historique
             if last_hist:
                 vals = {
                     'pred_risk': risk,
@@ -326,7 +326,7 @@ class HistoricEvaluation(models.Model):
     _description = 'Evaluation History'
 
     name = fields.Char(string="Référence")
-    date = fields.Datetime(string="Date de réponse", readonly=True)
+    date = fields.Datetime(string="Response Date", readonly=True)
     job_satis = fields.Selection(
         [
             ('low', 'Low'),

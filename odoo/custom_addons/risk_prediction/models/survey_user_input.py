@@ -27,7 +27,7 @@ class SurveyUserInput(models.Model):
         self.ensure_one()
         _logger.info("Starting _push_scores_to_employee for survey_user_input %s", self.id)
 
-        # Mapping des labels et champs
+        # Mapping des labels (categorie) et champs
         label_to_field = {
             'Job Satisfaction': 'job_satisfaction',
             'Work–Life Balance': 'work_life_balance',
