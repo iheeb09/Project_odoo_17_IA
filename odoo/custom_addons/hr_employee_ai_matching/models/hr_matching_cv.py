@@ -3,8 +3,8 @@ from odoo import models, fields
 
 class HRMatchingCV(models.Model):
     _name = "hr.matching.cv"
-    _description = "CV à comparer avec le poste"
+    _description = "Resume to be compared with the job opening"
 
-    job_id = fields.Many2one("hr.matching.job", string="Poste", required=True, ondelete="cascade")
+    job_id = fields.Many2one("hr.matching.job", string="Job", required=True)
     name = fields.Char("CV name", required=True)
     cv_pdf = fields.Binary("PDF File", required=True, attachment=True)

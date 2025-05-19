@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-  <!-- 📁 Menu racine IA sous Employés, visible uniquement pour le groupe admin du matching -->
+  <!-- Menu racine IA sous Employés-->
   <menuitem id="menu_hr_matching_root"
             name="IA Matching"
             parent="hr.menu_hr_root"
             sequence="90"
             />
 
-  <!-- 📂 Menu pour les postes, visible uniquement pour le groupe admin du matching -->
+  <!-- Menu pour les postes -->
   <menuitem id="menu_hr_matching_jobs"
             name="Open Positions"
             parent="menu_hr_matching_root"

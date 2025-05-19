@@ -1,4 +1,6 @@
 
+from odoo import models, fields
+
 class HistoricEvaluation(models.Model):
     _name = 'historique.evaluation'
     _description = 'Evaluation History'
