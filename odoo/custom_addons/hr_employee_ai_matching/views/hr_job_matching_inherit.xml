@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_hr_job_form_inherit_matching" model="ir.ui.view">
+        <field name="name">hr.job.form.inherit.matching</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+
+                <!-- Onglet 1: CV Upload -->
+                <page string="CV Upload">
+                    <group>
+                        <button name="action_compute_matching"
+                                string="Run IA Matching"
+                                type="object"
+                                class="btn-primary"
+                                icon="fa-magic"/>
+                    </group>
+                    <group string="Upload CVs">
+                        <field name="cv_upload_ids">
+                            <tree editable="bottom">
+                                <field name="name" string="CV Name"/>
+                                <field name="cv_pdf" filename="name" string="PDF File"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+
+                <!-- Onglet 2: Matching Results -->
+                <page string="Matching Results">
+                    <group string="AI Results">
+                        <field name="matching_result_ids">
+                            <tree>
+                                <field name="cv_name" string="CV Name"/>
+                                <field name="score" string="Matching Score (%)"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

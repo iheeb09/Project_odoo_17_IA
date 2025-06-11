@@ -6,7 +6,7 @@ class HRMatchingResult(models.Model):
     _description = "AI Result : similarity score between CV and Job"
 
     job_id = fields.Many2one(
-        "hr.matching.job",
+        "hr.job",
         string="Related Job",
         required=True,
         ondelete="cascade"

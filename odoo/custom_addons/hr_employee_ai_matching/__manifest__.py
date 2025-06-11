@@ -10,10 +10,9 @@
 
         "security/ir.model.access.csv",
 
-        "views/hr_matching_job_action.xml",
 
-        "views/hr_matching_job_views.xml",
-        "views/menu.xml"
+        "views/hr_job_matching_inherit.xml"
+
     ],
     "installable": True,
     "application": False

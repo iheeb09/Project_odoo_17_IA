@@ -1,8 +1,0 @@
-<odoo>
-    <record id="action_hr_matching_job" model="ir.actions.act_window">
-        <field name="name">Open Positions</field>
-        <field name="res_model">hr.matching.job</field>
-        <field name="view_mode">tree,form</field>
-
-    </record>
-</odoo>
