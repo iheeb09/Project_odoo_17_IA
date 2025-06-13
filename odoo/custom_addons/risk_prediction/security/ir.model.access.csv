@@ -4,4 +4,4 @@ access_risk_emp_employee,Access Employee Record,model_hr_employee,risk_predictio
 access_risk_hr_survey_input,Access HR Survey Responses,model_survey_user_input,risk_prediction.group_rh_risk,1,1,1,1
 access_risk_emp_survey_input,Access Employee Survey Responses,model_survey_user_input,risk_prediction.group_emp_risk,1,1,0,0
 access_survey_question_category,Access Survey Question Category,model_survey_question_category,risk_prediction.group_rh_risk,1,1,1,1
-access_historique_evaluation,Access Historique Evaluation,model_historique_evaluation,,1,1,1,1
+access_historique_evaluation,Access Historique Evaluation,model_historique_evaluation,risk_prediction.group_rh_risk,1,1,1,1

@@ -42,7 +42,7 @@ async def startup_event():
     global model, label_encoder
     try:
         model, label_encoder = load_model_and_encoder()
-        logging.info("✅Modèle et encodeur chargés avec succès.")
+        logging.info("Modèle et encodeur chargés avec succès.")
     except FileNotFoundError as e:
         logging.critical(f" Erreur de chargement du modèle ou encodeur : {str(e)}")
         raise HTTPException(status_code=500, detail=f"Erreur de chargement : {str(e)}")

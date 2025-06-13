@@ -1,0 +1,54 @@
+Créer un environnement virtuel (optionnel mais conseillé)
+Dans ton terminal/console :
+
+# À la racine de ton projet
+python3 -m venv venv
+
+source venv/bin/activate 
+pip install -r requirements.txt
+uvicorn app.main:app --host 0.0.0.0 --port 8050
+{
+                "department": "IT",
+                "departs_confirmes": 3.0,
+                "candidats_en_cours": 12.0,
+                "postes_ouverts_actuels": 8.0,
+                "effectif_actuel": 50.0,
+                "turnover_month_pct": 2.5,
+
+                "departs_confirmes_rolling_mean": 2.25,
+                "candidats_en_cours_rolling_mean": 10.5,
+                "postes_ouverts_actuels_rolling_mean": 4.75,
+                "effectif_actuel_rolling_mean": 29.0,
+                "turnover_month_pct_rolling_mean": 2.3,
+
+                "departs_confirmes_lag_1": 2.0,
+                "departs_confirmes_lag_2": 1.5,
+                "departs_confirmes_lag_3": 1.0,
+                "departs_confirmes_lag_4": 0.5,
+                "candidats_en_cours_lag_1": 11.0,
+                "candidats_en_cours_lag_2": 9.0,
+                "candidats_en_cours_lag_3": 8.0,
+                "candidats_en_cours_lag_4": 7.0,
+                "postes_ouverts_actuels_lag_1": 4.0,
+                "postes_ouverts_actuels_lag_2": 3.5,
+                "postes_ouverts_actuels_lag_3": 3.0,
+                "postes_ouverts_actuels_lag_4": 2.5,
+                "effectif_actuel_lag_1": 29.0,
+                "effectif_actuel_lag_2": 28.5,
+                "effectif_actuel_lag_3": 28.0,
+                "effectif_actuel_lag_4": 27.5,
+                "turnover_month_pct_lag_1": 2.1,
+                "turnover_month_pct_lag_2": 2.0,
+                "turnover_month_pct_lag_3": 1.9,
+                "turnover_month_pct_lag_4": 1.8,
+
+                "quarter_num": 4,
+                "annee": 2023
+            }
+
+
+
+
+docker build -t fastapi-recrutement .
+docker run -p 8050:8050 fastapi-recrutement
+

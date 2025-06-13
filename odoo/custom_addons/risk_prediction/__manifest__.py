@@ -12,6 +12,7 @@
     ],
     'data': [
         'security/groups.xml',
+        'security/record_rules.xml',
         'security/ir.model.access.csv',
         'data/ir_actions_server.xml',
         'data/hr_demo_employees.xml',

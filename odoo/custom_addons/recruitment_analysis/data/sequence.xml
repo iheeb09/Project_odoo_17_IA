@@ -1,0 +1,12 @@
+<odoo>
+  <data noupdate="1">
+    <!-- Séquence pour Department Analysis History -->
+    <record id="seq_department_analysis_history" model="ir.sequence">
+      <field name="name">Department Analysis History</field>
+      <field name="code">department.analysis.history</field>
+      <field name="prefix">H-</field>
+      <field name="padding">4</field>
+      <field name="company_id" eval="False"/>
+    </record>
+  </data>
+</odoo>

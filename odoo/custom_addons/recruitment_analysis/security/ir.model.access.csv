@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_department_analysis_calculator,access_department_analysis_calculator,model_department_analysis_calculator,risk_prediction.group_rh_risk,1,1,1,1
+access_department_analysis_history,access_department_analysis_history,model_department_analysis_history,risk_prediction.group_rh_risk,1,1,1,1
+

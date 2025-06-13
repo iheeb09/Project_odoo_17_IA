@@ -147,7 +147,7 @@ class SurveyUserInput(models.Model):
         hist_vals = {
             'name': ref,
             'date': resp_date,
-            'historic_id': emp.id,
+            'employee_id': emp.id,
             'job_satis': updates.get('job_satisfaction'),
             'work_life': updates.get('work_life_balance'),
 

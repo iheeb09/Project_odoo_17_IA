@@ -50,7 +50,7 @@
         <record id="demo_user_fatma" model="res.users">
             <field name="name">Fatma</field>
             <field name="login">fatma</field>
-            <field name="password" eval="'risk'"/>
+            <field name="password">odoo17</field>
             <field name="partner_id" ref="demo_part_fatma"/>
             <field name="email">fatma@example.com</field>
             <field name="share">False</field>
@@ -104,7 +104,7 @@
         <record id="demo_user_iheb" model="res.users">
             <field name="name">Iheb</field>
             <field name="login">iheb</field>
-            <field name="password">risk</field>
+            <field name="password">odoo17</field>
             <field name="partner_id" ref="demo_part_iheb"/>
             <field name="email">iheb@example.com</field>
             <field name="share">False</field>
@@ -159,7 +159,7 @@
         <record id="demo_user_carol" model="res.users">
             <field name="name">Carol</field>
             <field name="login">carol</field>
-            <field name="password">risk</field>
+            <field name="password">odoo17</field>
             <field name="partner_id" ref="demo_part_carol"/>
             <field name="email">carol.nguyen@example.com</field>
             <field name="share">False</field>
@@ -211,7 +211,7 @@
         <record id="demo_user_khayri" model="res.users">
             <field name="name">Khayri</field>
             <field name="login">khayri</field>
-            <field name="password">risk</field>
+             <field name="password">odoo17</field>
             <field name="partner_id" ref="demo_part_khayri"/>
             <field name="email">khayri@example.com</field>
             <field name="share">False</field>
@@ -263,7 +263,7 @@
         <record id="demo_user_aya" model="res.users">
             <field name="name">Aya</field>
             <field name="login">aya</field>
-            <field name="password">risk</field>
+             <field name="password">odoo17</field>
             <field name="partner_id" ref="demo_part_aya"/>
             <field name="email">aya@example.com</field>
             <field name="share">False</field>

@@ -123,14 +123,9 @@ class HrEmployee(models.Model):
         string="Predicted Risk", readonly=True
     )
 
-    historic_detaill = fields.One2many('historique.evaluation', 'historic_id', string='Historic', invisible="1")
-    # ==================================================================
-    # Champs numériques totaux
-
-
+    historic_detaill = fields.One2many('historique.evaluation', 'employee_id', string='Historic', invisible="1")
 
     # ==================================================================
-
     @api.depends('birthday')
     def _compute_age(self):
         today = date.today()
@@ -223,10 +218,10 @@ class HrEmployee(models.Model):
     # ------------------------------------------------------------------
     def predict_risk_for_employees(self):
         """
-        Appelle le service FastAPI 'http://fastapir:8020/predict'
+        Appelle le service FastAPI 'http://fastapirisk:8020/predict'
         et met à jour le champ predicted_risk.
         """
-        url = "http://fastapir:8020/predict"
+        url = "http://fastapirisk:8020/predict"
         valid_keys = []
         for k, _ in self._fields['predicted_risk'].selection:
             valid_keys.append(k)

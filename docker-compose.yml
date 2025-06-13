@@ -49,12 +49,9 @@ services:
     command: uvicorn app.main:app --host 0.0.0.0 --port 8045
     restart: always
 
-  fastapir:
-    build:
-      context: ./fastapi_risk_api
-      dockerfile: Dockerfile
-
-    container_name: fastapir
+  fastapirisk:
+    build: ./risk_api
+    container_name: fastapirisk
     depends_on:
       - db
     ports:
@@ -63,6 +60,16 @@ services:
       - my-network
     command: uvicorn app.main:app --host 0.0.0.0 --port 8020
     restart: always
+
+    fastapirecrut:
+      build: ./recrutement_api
+      container_name: fastapirecrut
+      ports:
+        - "8050:8050"
+      networks:
+        - my-network
+      command: uvicorn app.main:app --host 0.0.0.0 --port 8050
+      restart: always
 
 networks:
   my-network:

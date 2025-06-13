@@ -50,4 +50,5 @@ class HistoricEvaluation(models.Model):
         [('low', 'Low'), ('medium', 'Medium'), ('high', 'High'), ('undefined', 'Undefined')],
         string="Predicted Risk", readonly=True
     )
-    historic_id = fields.Many2one('hr.employee', string="Employe")
+    employee_id = fields.Many2one('hr.employee', string="Employee")
+

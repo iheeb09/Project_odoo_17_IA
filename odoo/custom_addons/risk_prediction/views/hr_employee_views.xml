@@ -21,7 +21,8 @@
                                 type="object"
                                 string="Predict Risk"
                                 class="btn-primary"
-                                icon="fa-bolt"/>
+                                icon="fa-bolt"
+                        />
                     </header>
 
                     <field name="name"/>
@@ -72,6 +73,16 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="before">
+                <header>
+                    <button name="predict_risk_for_employees"
+                            type="object"
+                            string="Predict Risk"
+                            class="btn-primary"
+                            groups="risk_prediction.group_rh_risk"
+                            icon="fa-bolt"/>
+                </header>
+            </xpath>
             <!--  Ajout des onglets -->
             <xpath expr="//sheet/notebook" position="inside">
                 <!-- ONGLET 1 : Profile -->
@@ -144,15 +155,15 @@
                            widget="one2many_list"
                            readonly="1">
                         <tree editable="false">
-                            <field name="date" />
-                            <field name="job_satis" />
-                            <field name="work_life" />
-                            <field name="performance" />
-                            <field name="leadership_opport" />
-                            <field name="innovation_opport" />
-                            <field name="company_reput" />
-                            <field name="employee_recog" />
-                            <field name="pred_risk" />
+                            <field name="date"/>
+                            <field name="job_satis"/>
+                            <field name="work_life"/>
+                            <field name="performance"/>
+                            <field name="leadership_opport"/>
+                            <field name="innovation_opport"/>
+                            <field name="company_reput"/>
+                            <field name="employee_recog"/>
+                            <field name="pred_risk"/>
                         </tree>
                     </field>
                 </page>

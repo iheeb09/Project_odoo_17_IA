@@ -1,0 +1,52 @@
+<odoo>
+  <data>
+    <!-- Rule: Employees see only their own records -->
+    <record id="rule_employee_self_hr" model="ir.rule">
+      <field name="name">Employee: Own records only</field>
+      <field name="model_id" ref="model_hr_employee"/>
+      <field name="domain_force">[('user_id','=',user.id)]</field>
+      <field name="groups" eval="[(4, ref('risk_prediction.group_emp_risk'))]"/>
+    </record>
+
+    <!-- Rule: RH Risk sees all employee records -->
+    <record id="rule_hr_risk_all_hr" model="ir.rule">
+      <field name="name">RH Risk: All records</field>
+      <field name="model_id" ref="model_hr_employee"/>
+      <field name="domain_force">[(1,'=',1)]</field>
+      <field name="groups" eval="[(4, ref('risk_prediction.group_rh_risk'))]"/>
+    </record>
+
+     <!-- Rule: Employees see only their own survey responses -->
+     <record id="rule_employee_self_survey_responses" model="ir.rule">
+       <field name="name">Employee: Own survey Responses</field>
+        <field name="model_id" ref="model_survey_user_input"/>
+        <!-- Filtre sur le partenaire lié à l'utilisateur courant -->
+       <field name="domain_force">[('partner_id','=', user.partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('risk_prediction.group_emp_risk'))]"/>
+     </record>
+
+    <!-- Rule: RH Risk sees all survey responses -->
+    <record id="rule_hr_risk_all_survey" model="ir.rule">
+      <field name="name">RH Risk: All survey responses</field>
+      <field name="model_id" ref="model_survey_user_input"/>
+      <field name="domain_force">[(1,'=',1)]</field>
+      <field name="groups" eval="[(4, ref('risk_prediction.group_rh_risk'))]"/>
+    </record>
+
+    <!-- Rule: RH Risk sees all historique evaluations -->
+    <record id="rule_hr_risk_all_history" model="ir.rule">
+      <field name="name">RH Risk: All historique evaluations</field>
+      <field name="model_id" ref="model_historique_evaluation"/>
+      <field name="domain_force">[(1,'=',1)]</field>
+      <field name="groups" eval="[(4, ref('risk_prediction.group_rh_risk'))]"/>
+    </record>
+
+    <!-- Rule: Employees see only their own historique evaluations -->
+    <record id="rule_employee_self_history" model="ir.rule">
+      <field name="name">Employee: Own history only</field>
+      <field name="model_id" ref="model_historique_evaluation"/>
+      <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+      <field name="groups" eval="[(4, ref('risk_prediction.group_emp_risk'))]"/>
+    </record>
+  </data>
+</odoo>

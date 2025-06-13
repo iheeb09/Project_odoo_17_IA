@@ -1,0 +1,93 @@
+<odoo>
+    <!-- 1) Form View -->
+    <record id="view_department_analysis_form" model="ir.ui.view">
+        <field name="name">department.analysis.calculator.form.improved</field>
+        <field name="model">department.analysis.calculator</field>
+        <field name="arch" type="xml">
+            <form string="Department Recruitment Analysis">
+                <header>
+                    <button name="action_calculate_prediction"
+                            string="Calculate &amp; Save"
+                            type="object"
+                            class="btn-primary"
+                            icon="fa-calculator"/>
+
+                </header>
+                <sheet>
+                    <notebook>
+                        <page string="Settings">
+                            <group>
+                                <field name="department_id" options="{'no_create': True}"/>
+                                <field name="analysis_year"/>
+                                <field name="analysis_month"/>
+                                <field name="date_from" readonly="1"/>
+                                <field name="date_to" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Performance Metrics">
+                            <group>
+                                <field name="departs_confirmes" readonly="1"/>
+                                <field name="candidats_en_cours" readonly="1"/>
+                                <field name="postes_ouverts_actuels" readonly="1"/>
+                                <field name="effectif_actuel" readonly="1"/>
+                                <field name="turnover_month_pct" readonly="1" widget="percentage"/>
+                            </group>
+                            <group>
+                                <label for="predicted_need" string="Predicted Recruitment Need"
+                                       style="font-weight:bold; font-size:14px; margin-top:10px;"/>
+                                <div style="font-size:28px; color:#1976d2; font-weight:700; text-align:center; margin-top:5px;">
+                                    <field name="predicted_need" readonly="1"/>
+                                </div>
+                            </group>
+
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- 2) Tree View -->
+    <record id="view_department_analysis_history_tree" model="ir.ui.view">
+        <field name="name">department.analysis.history.tree.improved</field>
+        <field name="model">department.analysis.history</field>
+        <field name="arch" type="xml">
+            <tree string="Analysis History" create="false">
+                <field name="department_id" string="Department"/>
+                <field name="analysis_year" string="Year"/>
+                <field name="analysis_month" string="Month"/>
+                <field name="quarter_num" string="Quarter"/>
+                <field name="predicted_need" string="Predicted Need"/>
+                <field name="departs_confirmes" string="Confirmed Departures"/>
+                <field name="candidats_en_cours" string="Candidates Pipeline"/>
+                <field name="postes_ouverts_actuels" string="Open Positions"/>
+                <field name="effectif_actuel" string="Current Staff"/>
+                <field name="turnover_month_pct" string="Turnover Rate" widget="percentage"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- 3) Actions -->
+    <record id="action_department_analysis_calc" model="ir.actions.act_window">
+        <field name="name">Department Analysis</field>
+        <field name="res_model">department.analysis.calculator</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_department_analysis_form"/>
+    </record>
+
+    <record id="action_department_analysis_history" model="ir.actions.act_window">
+        <field name="name">Analysis History</field>
+        <field name="res_model">department.analysis.history</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_department_analysis_history_tree"/>
+    </record>
+
+    <!-- 4) Menus -->
+    <menuitem id="menu_hr_root_analysis" name="Recruitment Analytics"
+              parent="hr_recruitment.menu_hr_recruitment_root" sequence="30"/>
+    <menuitem id="menu_department_analysis_calc" name="Department Analysis"
+              parent="menu_hr_root_analysis" action="action_department_analysis_calc" sequence="1"/>
+    <menuitem id="menu_department_analysis_history" name="Analysis History"
+              parent="menu_hr_root_analysis" action="action_department_analysis_history" sequence="2"/>
+</odoo>
